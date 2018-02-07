@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mar. 06 fév. 2018 à 13:25
+-- Généré le :  mer. 07 fév. 2018 à 22:06
 -- Version du serveur :  10.1.29-MariaDB
 -- Version de PHP :  7.2.0
 
@@ -21,6 +21,25 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `cup2018`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `abonnement`
+--
+
+CREATE TABLE `abonnement` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_joueur` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `abonnement`
+--
+
+INSERT INTO `abonnement` (`id`, `id_user`, `id_joueur`) VALUES
+(1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -49,6 +68,13 @@ CREATE TABLE `entraineur` (
   `description` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `entraineur`
+--
+
+INSERT INTO `entraineur` (`id`, `nom`, `prenom`, `description`) VALUES
+(1, 'ddddd', 'dddd', 'ddddd');
+
 -- --------------------------------------------------------
 
 --
@@ -62,6 +88,17 @@ CREATE TABLE `equipe` (
   `drapeau` varchar(250) NOT NULL,
   `maillot` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `equipe`
+--
+
+INSERT INTO `equipe` (`id`, `id_entraineur`, `nom`, `drapeau`, `maillot`) VALUES
+(1, 1, 'sss', 'lien', 'lien'),
+(2, 1, 'tunisia', 'lien', 'lien'),
+(4, 1, 'tunisia', 'lien', 'lien'),
+(5, 1, 'tunisia', 'lien', 'lien'),
+(6, 1, 'portugal', 'iiiii', 'llllll');
 
 -- --------------------------------------------------------
 
@@ -94,6 +131,15 @@ CREATE TABLE `joueur` (
   `numero` int(11) NOT NULL,
   `club` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `joueur`
+--
+
+INSERT INTO `joueur` (`id`, `id_equipe`, `nom`, `prenom`, `age`, `poste`, `numero`, `club`) VALUES
+(2, 1, 'sdds', 'ddddddd', 77, 'gauche', 88, 'css'),
+(3, 1, 'ben haj', 'ahmed', 21, 'droite', 8, 'css'),
+(6, 2, 'lilwayne', 'chika', 21, 'droite', 8, 'css');
 
 -- --------------------------------------------------------
 
@@ -176,8 +222,23 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`id`, `nom`, `prenom`, `username`, `email`, `mdp`, `role`, `image`, `type`, `etat`, `date_creation`, `connecte`) VALUES
+(1, 'ddd', 'fffff', 'vvvv', 'email', 'ffff', 'admin', 'image', 1, 1, '3910-03-02', 'ON');
+
+--
 -- Index pour les tables déchargées
 --
+
+--
+-- Index pour la table `abonnement`
+--
+ALTER TABLE `abonnement`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ck_user_1` (`id_user`),
+  ADD KEY `ck_joueur_1` (`id_joueur`);
 
 --
 -- Index pour la table `commentaire`
@@ -255,6 +316,12 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT pour la table `abonnement`
+--
+ALTER TABLE `abonnement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT pour la table `commentaire`
 --
 ALTER TABLE `commentaire`
@@ -264,13 +331,13 @@ ALTER TABLE `commentaire`
 -- AUTO_INCREMENT pour la table `entraineur`
 --
 ALTER TABLE `entraineur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `equipe`
 --
 ALTER TABLE `equipe`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `evenement`
@@ -282,7 +349,7 @@ ALTER TABLE `evenement`
 -- AUTO_INCREMENT pour la table `joueur`
 --
 ALTER TABLE `joueur`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT pour la table `joueur_participant`
@@ -312,11 +379,18 @@ ALTER TABLE `stade`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `abonnement`
+--
+ALTER TABLE `abonnement`
+  ADD CONSTRAINT `ck_joueur_1` FOREIGN KEY (`id_joueur`) REFERENCES `joueur` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `ck_user_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `commentaire`
