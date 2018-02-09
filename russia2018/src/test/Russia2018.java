@@ -82,5 +82,7 @@ public class Russia2018 {
         //System.out.println(service_abo.getALL());
         //System.out.println(service_abo.get_users_etleur_joueur());
         //System.out.println(service_abo.D_chercher_of_joueur("sd"));
+        //System.out.println(service_abo.s_abonner_a(service.retrieveId(1), P.get(2)));
+        //System.out.println(service_abo.getALL());
     }   
 }
