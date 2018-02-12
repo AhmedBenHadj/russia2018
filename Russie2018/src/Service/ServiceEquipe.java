@@ -100,9 +100,36 @@ public class ServiceEquipe implements IServiceEquipe {
                 E.setMaillot(res.getString("maillot"));
                 E.setProgress(Equipe.Progress.valueOf(res.getString("progress")));
                 E.setPts(res.getInt(7));
-                E.setGroupe(new ServiceGroupe().get(res.getInt(8)));
-                E.setListe_joueur(this.get_Joueurs(id));
+                E.setGroupe(new ServiceGroupe().get(res.getInt(8)));  
+                //E.setListe_joueur(this.get_Joueurs(id));
+                E.setListe_joueur(new ArrayList<Joueur>());
             }
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return E;
+    }
+    
+    public Equipe get_by_name(String nom) {
+        Equipe E = new Equipe();
+        try {
+            String req = "SELECT * FROM equipe WHERE nom=?";
+            pst = cnx.prepareStatement(req);
+            pst.setString(1, nom);
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                E.setId(res.getInt(1));
+                E.setEntraineur(new ServiceEntraineur().get(res.getInt(2)));
+                E.setNom(res.getString("nom"));
+                E.setDrapeau(res.getString("drapeau"));
+                E.setMaillot(res.getString("maillot"));
+                E.setProgress(Equipe.Progress.valueOf(res.getString("progress")));
+                E.setPts(res.getInt(7));
+                E.setGroupe(new ServiceGroupe().get(res.getInt(8)));  
+                //E.setListe_joueur(this.get_Joueurs(id));
+                E.setListe_joueur(new ArrayList<Joueur>());
+            }          
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -213,7 +240,7 @@ public class ServiceEquipe implements IServiceEquipe {
                 pst.setInt(1, id);
                 ResultSet res = pst.executeQuery();
                 while (res.next()) {
-                    Joueur j = new Joueur(res.getInt(1), new ServiceEquipe().get(res.getInt(2)), res.getString("nom"), res.getString("prenom"), res.getInt(5), res.getString("poste"), res.getInt(7), res.getString("club"));
+                    Joueur j = new Joueur(res.getInt(1), this.get(res.getInt(2)), res.getString("nom"), res.getString("prenom"), res.getInt(5), res.getString("poste"), res.getInt(7), res.getString("club"));
                     liste.add(j);
                 }
             } catch (SQLException s) {

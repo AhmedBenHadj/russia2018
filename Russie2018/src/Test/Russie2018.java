@@ -14,6 +14,7 @@ import Entite.User;
 import Service.ServiceEntraineur;
 import Service.ServiceEquipe;
 import Service.ServiceGroupe;
+import Service.ServiceJoueur;
 import Service.ServiceUser;
 import Utilitaire.MD5;
 import Utilitaire.Password;
@@ -39,12 +40,18 @@ public class Russie2018 {
         ServiceEntraineur S = new ServiceEntraineur();
         //S.ajouter(E2);
         ServiceEquipe S1 = new ServiceEquipe();
-        List<Joueur> liste = new ArrayList<>() ;
+        List<Joueur> liste = new ArrayList<>(S1.get_Joueurs(10)) ;
         Equipe E1 = new Equipe(S.get(1), "italia", "azra9", "a7mer", liste,S2.get(1), 0);
         //System.out.println(S2.get(1));
-        //S1.ajouter(E1);
-        E1.setListe_joueur(S1.get_Joueurs(E1.getId()));
-        System.out.println(S1.get(10));
+        //S1.ajouter(E1); 
+        //E1.setListe_joueur(S1.get_Joueurs(E1.getId()));
+        E1 = S1.get(10);
+        E1.setListe_joueur(liste);
+        System.out.println(E1);
+        Joueur J = new Joueur(S1.get(10),"belhaj", "ahmed", 20, "AC", 8, "css");
+        ServiceJoueur Service_joueur = new ServiceJoueur();
+        //Service_joueur.ajouter(J);
+        //System.out.println(Service_joueur.getALL());
     }
 
 }

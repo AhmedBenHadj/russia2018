@@ -5,10 +5,22 @@
  */
 package Presentation;
 
+import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
@@ -123,13 +135,111 @@ public class AcceuilController implements Initializable {
     private GridPane Grid_chat;
     @FXML
     private Label Id_Chat;
-
+    @FXML
+    private JFXListView<String> Gerer_match_list;
+    @FXML
+    private JFXListView<String> Gere_Evenement_list;
+    @FXML
+    private TitledPane Gere_Groupe;
+    @FXML
+    private JFXListView<String> Gere_Groupe_List;
+    @FXML
+    private TitledPane Gere_Stade;
+    @FXML
+    private JFXListView<String> Gerer_Stade_List;
+    @FXML
+    private TitledPane Gere_Joueur;
+    @FXML
+    private JFXListView<String> Gerer_Joueur_List;
+    @FXML
+    private TitledPane Gere_Equipe;
+    @FXML
+    private JFXListView<String> Gerer_Equipe_List;
+    @FXML
+    private TabPane Dashboard_tabpane;
+    @FXML
+    private JFXListView<String> Joueur_List;
+    @FXML
+    private JFXListView<String> Mach_list;
+    @FXML
+    private JFXListView<String> Calendrier_List;
+    @FXML
+    private JFXListView<String> Equipe_List;
+    @FXML
+    private JFXTextArea Liste_discussion;
+    @FXML
+    private JFXTextField id_ecriture;
+    
+    private void loadListview(){
+        ObservableList<String> ols=FXCollections.observableArrayList();
+        ols.add("Ajouter Match");
+        ols.add("Modifier Match");
+        Gerer_match_list.setItems(ols);
+        ObservableList<String> liste_joueur=FXCollections.observableArrayList();
+        liste_joueur.add("Ajouter joueur");
+        liste_joueur.add("Modifier joueur");
+        liste_joueur.add("Supprimer joueur");
+        Gerer_Joueur_List.setItems(liste_joueur);
+        ObservableList<String> liste_option_joueur=FXCollections.observableArrayList();
+        liste_option_joueur.add("Tout les joueurs");
+        Joueur_List.setItems(liste_option_joueur);
+    }
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        loadListview();
+        selectMenu();
     }    
-    
+    private void selectMenu(){
+        Gerer_Joueur_List.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                int i=Gerer_Joueur_List.getSelectionModel().getSelectedIndex();
+                if(i==0){
+                    try {
+                        Node node=(AnchorPane) FXMLLoader.load(getClass().getResource("formulaire_ajout_joueur.fxml"));
+                        Tab tb=new Tab("Ajout joueur",node);
+                        Dashboard_tabpane.getTabs().add(tb);
+                    } catch (IOException ex) {
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                else if(i==1){
+                    try {
+                        Node node=(AnchorPane) FXMLLoader.load(getClass().getResource("formulaire_modifier_joueur.fxml"));
+                        Tab tb=new Tab("Modifier joueur",node);
+                        Dashboard_tabpane.getTabs().add(tb);
+                    } catch (IOException ex) {
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                else if(i==2){
+                    try {
+                        Node node=(AnchorPane) FXMLLoader.load(getClass().getResource("supprimer_joueur.fxml"));
+                        Tab tb=new Tab("Supprimer joueur",node);
+                        Dashboard_tabpane.getTabs().add(tb);
+                    } catch (IOException ex) {
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
+        Joueur_List.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue){
+                int i=Joueur_List.getSelectionModel().getSelectedIndex();
+                if(i==0){
+                    try {
+                        Node node=(AnchorPane) FXMLLoader.load(getClass().getResource("conteneur_liste_joueur.fxml"));
+                        Tab tb=new Tab("Tout les joueurs",node);
+                        Main_tabpane.getTabs().add(tb);
+                    } catch (IOException ex) {
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
+    }
 }

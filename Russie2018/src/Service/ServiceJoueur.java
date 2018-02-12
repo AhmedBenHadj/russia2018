@@ -108,6 +108,28 @@ public class ServiceJoueur implements IServiceJoueur {
         }
         return E;
     }
+    public Joueur get(String nom) {
+        Joueur E = new Joueur();
+        try {
+            String req = "SELECT * FROM joueur WHERE nom=?";
+            pst = cnx.prepareStatement(req);
+            pst.setString(1, nom);
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                E.setId(res.getInt(1));
+                E.setEquipe(new ServiceEquipe().get(res.getInt(2)));
+                E.setNom(res.getString("nom"));
+                E.setPrenom(res.getString("prenom"));
+                E.setAge(res.getInt(5));
+                E.setPoste(res.getString("poste"));
+                E.setNumero(res.getInt(7));
+                E.setClub(res.getString("club"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return E;
+    }
 
     @Override
     public List<Joueur> getALL() {
