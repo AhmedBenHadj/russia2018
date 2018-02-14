@@ -52,8 +52,8 @@ public class ServiceGroupe implements IServiceGroupe {
             while(r.next()){
                 Groupe m=new Groupe();
                 m.setId(r.getInt(1));
-                m.setGM(new ServiceMatch().get_Match_Par_ID(r.getInt(2)));
-                m.setNom(r.getString(3));
+                m.setGM(new ServiceMatch().get_Match_Par_ID(r.getInt(1)));
+                m.setNom(r.getString(2));
                 l.add(m);
             }
         } catch (SQLException ex) {
@@ -87,6 +87,24 @@ public class ServiceGroupe implements IServiceGroupe {
             while(res.next()){
                 E.setId(id);
                 E.setGM(new ServiceMatch().get_Match_Par_ID(id));
+                E.setNom(res.getString(2));          
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return E;
+    }
+    
+    public Groupe get(String nom) {
+         Groupe E = new Groupe() ;
+        try{
+            String req ="SELECT * FROM groupe WHERE nom=?";
+           PreparedStatement pst= MyConnexion.getInstance().prepareStatement(req);
+            pst.setString(1, nom);
+            ResultSet res = pst.executeQuery();
+            while(res.next()){
+                E.setId(res.getInt(1));
+                E.setGM(new ServiceMatch().get_Match_Par_ID(res.getInt(1)));
                 E.setNom(res.getString(2));          
             }
         }catch(SQLException e){

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface IServiceJoueur {
     boolean ajouter(Joueur j) ;
-    void modifier(int id,Equipe equipe,String nom,String prenom ,int age ,String poste,int numero,String club) ;
+    void modifier(int id,Equipe equipe,String nom,String prenom ,int age ,String poste,int numero,String club,String image) ;
     boolean supprimer(Joueur j);
     Joueur get(int id);
     List<Joueur> getALL();

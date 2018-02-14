@@ -59,7 +59,7 @@ public class ServiceEquipe implements IServiceEquipe {
             pst.setString(2, nom);
             pst.setString(3, drapeau);
             pst.setString(4, maillot);
-            pst.setObject(5, progress);
+            pst.setObject(5, progress.toString());
             pst.setInt(6, pts);
             pst.setInt(7, id);
             pst.executeUpdate();
@@ -221,7 +221,7 @@ public class ServiceEquipe implements IServiceEquipe {
                 pst.setInt(1, e.getId());
                 ResultSet res = pst.executeQuery();
                 while (res.next()) {
-                    Joueur j = new Joueur(res.getInt(1), new ServiceEquipe().get(res.getInt(2)), res.getString("nom"), res.getString("prenom"), res.getInt(5), res.getString("poste"), res.getInt(7), res.getString("club"));
+                    Joueur j = new Joueur(res.getInt(1), new ServiceEquipe().get(res.getInt(2)), res.getString("nom"), res.getString("prenom"), res.getInt(5), res.getString("poste"), res.getInt(7), res.getString("club"),res.getString("image"));
                     liste.add(j);
                 }
             } catch (SQLException s) {
@@ -240,7 +240,7 @@ public class ServiceEquipe implements IServiceEquipe {
                 pst.setInt(1, id);
                 ResultSet res = pst.executeQuery();
                 while (res.next()) {
-                    Joueur j = new Joueur(res.getInt(1), this.get(res.getInt(2)), res.getString("nom"), res.getString("prenom"), res.getInt(5), res.getString("poste"), res.getInt(7), res.getString("club"));
+                    Joueur j = new Joueur(res.getInt(1), this.get(res.getInt(2)), res.getString("nom"), res.getString("prenom"), res.getInt(5), res.getString("poste"), res.getInt(7), res.getString("club"),res.getString("image"));
                     liste.add(j);
                 }
             } catch (SQLException s) {
@@ -249,5 +249,19 @@ public class ServiceEquipe implements IServiceEquipe {
         
         return liste;
     }
-
+    public List<Equipe> get_by_group(String nom_groupe) {
+        List<Equipe> liste = new ArrayList<>();
+        try {
+            String req = "SELECT * FROM equipe WHERE id_groupe="+new ServiceGroupe().get(nom_groupe).getId();
+            pst = cnx.prepareStatement(req);
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                Equipe E = new Equipe(res.getInt(1), new ServiceEntraineur().get(res.getInt(2)), res.getString("nom"), res.getString("drapeau"), res.getString("maillot"),this.get_Joueurs(res.getInt(1)),new ServiceGroupe().get(res.getInt(8)),res.getInt(7),Equipe.Progress.valueOf(res.getString("progress")));
+                liste.add(E);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return liste;
+    }
 }

@@ -5,6 +5,7 @@
  */
 package Presentation;
 
+import Entite.Entraineur;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -169,6 +170,10 @@ public class AcceuilController implements Initializable {
     private JFXTextArea Liste_discussion;
     @FXML
     private JFXTextField id_ecriture;
+    @FXML
+    private TitledPane Gere_Entraineur;
+    @FXML
+    private JFXListView<String> Gerer_Entraineur_List;
     
     private void loadListview(){
         ObservableList<String> ols=FXCollections.observableArrayList();
@@ -183,6 +188,20 @@ public class AcceuilController implements Initializable {
         ObservableList<String> liste_option_joueur=FXCollections.observableArrayList();
         liste_option_joueur.add("Tout les joueurs");
         Joueur_List.setItems(liste_option_joueur);
+        ObservableList<String> liste_equipe=FXCollections.observableArrayList();
+        liste_equipe.add("Ajout équipe");
+        liste_equipe.add("modifier équipe");
+        liste_equipe.add("supprimer équipe");
+        Gerer_Equipe_List.setItems(liste_equipe);
+        ObservableList<String> liste_option_equipe=FXCollections.observableArrayList();
+        liste_option_equipe.add("Toutes les équipes");
+        liste_option_equipe.add("Toutes les entraineurs");
+        Equipe_List.setItems(liste_option_equipe);
+        ObservableList<String> liste_entraineur=FXCollections.observableArrayList();
+        liste_entraineur.add("Ajouter entraineur");
+        liste_entraineur.add("modifier entraineur");
+        liste_entraineur.add("supprimer entraineur");
+        Gerer_Entraineur_List.setItems(liste_entraineur);
     }
     /**
      * Initializes the controller class.
@@ -234,7 +253,108 @@ public class AcceuilController implements Initializable {
                     try {
                         Node node=(AnchorPane) FXMLLoader.load(getClass().getResource("conteneur_liste_joueur.fxml"));
                         Tab tb=new Tab("Tout les joueurs",node);
+                        tb.setClosable(true);
+                        Main_tabpane.getTabs().add(tb); 
+                    
+                    } catch (IOException ex) {
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
+        Equipe_List.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue){
+                int i=Equipe_List.getSelectionModel().getSelectedIndex();
+                if(i==0){
+                    try {
+                        Node node=(AnchorPane) FXMLLoader.load(getClass().getResource("Conteneur_liste_equipe.fxml"));
+                        Tab tb=new Tab("Toutes les équipes",node);
                         Main_tabpane.getTabs().add(tb);
+                        //Equipe_List.getSelectionModel().clearSelection();
+                    } catch (IOException ex) {
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                    }
+                    catch(java.lang.IndexOutOfBoundsException e){
+                        
+                    }
+                } 
+                if(i==1){
+                    try {
+                        Node node=(AnchorPane) FXMLLoader.load(getClass().getResource("Conteneur_liste_entraineur.fxml"));
+                        Tab tb=new Tab("Tout les entraineur",node);
+                        Main_tabpane.getTabs().add(tb);
+                        //Equipe_List.getSelectionModel().clearSelection();
+                    } catch (IOException ex) {
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                    }
+                    catch(java.lang.IndexOutOfBoundsException e){
+                        
+                    }
+                }
+            }           
+        });
+        
+        Gerer_Equipe_List.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue){
+                int i=Gerer_Equipe_List.getSelectionModel().getSelectedIndex();
+                if(i==0){
+                    try {
+                        Node node=(AnchorPane) FXMLLoader.load(getClass().getResource("formulaire_ajout_equipe.fxml"));
+                        Tab tb=new Tab("Ajout équipe",node);
+                        Dashboard_tabpane.getTabs().add(tb);
+                    } catch (IOException ex) {
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if(i==1){
+                    try {
+                        Node node=(AnchorPane) FXMLLoader.load(getClass().getResource("modifier_equipe.fxml"));
+                        Tab tb=new Tab("Modifier equipe",node);
+                        Dashboard_tabpane.getTabs().add(tb);
+                    } catch (IOException ex) {
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if(i==2){
+                    try {
+                        Node node=(AnchorPane) FXMLLoader.load(getClass().getResource("supprimer_equipe.fxml"));
+                        Tab tb=new Tab("Supprimer equipe",node);
+                        Dashboard_tabpane.getTabs().add(tb);
+                    } catch (IOException ex) {
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
+        Gerer_Entraineur_List.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue){
+                int i=Gerer_Entraineur_List.getSelectionModel().getSelectedIndex();
+                if(i==0){
+                    try {
+                        Node node=(AnchorPane) FXMLLoader.load(getClass().getResource("Formulaire_ajout_entraineur.fxml"));
+                        Tab tb=new Tab("Ajout entraineur",node);
+                        Dashboard_tabpane.getTabs().add(tb);
+                    } catch (IOException ex) {
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if(i==1){
+                    try {
+                        Node node=(AnchorPane) FXMLLoader.load(getClass().getResource("Formulaire_modifier_entraineur.fxml"));
+                        Tab tb=new Tab("Modifier entraineur",node);
+                        Dashboard_tabpane.getTabs().add(tb);
+                    } catch (IOException ex) {
+                        Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                if(i==2){
+                    try {
+                        Node node=(AnchorPane) FXMLLoader.load(getClass().getResource("Formulaire_supprimer_entraineur.fxml"));
+                        Tab tb=new Tab("Supprimer entraineur",node);
+                        Dashboard_tabpane.getTabs().add(tb);
                     } catch (IOException ex) {
                         Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
                     }

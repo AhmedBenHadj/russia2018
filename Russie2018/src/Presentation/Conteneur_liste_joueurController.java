@@ -50,7 +50,7 @@ public class Conteneur_liste_joueurController implements Initializable {
         loader.setLocation(getClass().getResource(s));
         try {
             loader.load();
-            Case_joueurController ac = (Case_joueurController) loader.getController();
+            Case_joueur_1Controller ac = (Case_joueur_1Controller) loader.getController();
             ac.setJoueur(p);
             return loader.getRoot();
         } catch (IOException ex) {
@@ -71,7 +71,7 @@ public class Conteneur_liste_joueurController implements Initializable {
         vbox.setPrefHeight(200*liste_joueur.size());
         vbox.getChildren().clear();
         for(Joueur J : liste_joueur){
-            AnchorPane case_joueur = (AnchorPane) loadFXML("case_joueur.fxml", J);
+            AnchorPane case_joueur = (AnchorPane) loadFXML("Case_joueur_1.fxml", J);
             vbox.getChildren().add(case_joueur);
         }
     }
@@ -84,7 +84,7 @@ public class Conteneur_liste_joueurController implements Initializable {
         vbox.setPrefHeight(200*liste_joueur.size());
         vbox.getChildren().clear();
         for(Joueur J : liste_joueur){
-            AnchorPane case_joueur = (AnchorPane) loadFXML("case_joueur.fxml", J);
+            AnchorPane case_joueur = (AnchorPane) loadFXML("case_joueur_1.fxml", J);
             vbox.getChildren().add(case_joueur);
         }
     }

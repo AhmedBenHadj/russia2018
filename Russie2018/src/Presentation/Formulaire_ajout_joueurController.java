@@ -12,6 +12,7 @@ import Service.ServiceJoueur;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -20,6 +21,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.stage.FileChooser;
 
 /**
  * FXML Controller class
@@ -44,6 +47,10 @@ public class Formulaire_ajout_joueurController implements Initializable {
     private JFXTextField numero_joueur;
     @FXML
     private JFXButton Ajouter;
+    @FXML
+    private Label titre;
+    @FXML
+    private JFXButton image;
 
     /**
      * Initializes the controller class.
@@ -94,8 +101,20 @@ public class Formulaire_ajout_joueurController implements Initializable {
         Equipe E= new Equipe();
         E = new ServiceEquipe().get_by_name((String)nom_equipe.getValue());
         J.setEquipe(E);
+        J.setImage(image.getText());
         new ServiceJoueur().ajouter(J);
         System.out.println("Ajout joueur OK");
+    }
+
+    @FXML
+    private void upload(ActionEvent event) {
+        FileChooser F = new FileChooser();
+        F.setTitle("image joueur");
+        F.getExtensionFilters().addAll();
+        File f = F.showOpenDialog(titre.getScene().getWindow());
+        if(f != null){
+            image.setText(f.toString());
+        }
     }
     
 }

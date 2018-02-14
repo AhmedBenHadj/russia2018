@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -52,5 +53,6 @@ public class Case_joueurController implements Initializable {
         age.setText(Integer.toString(J.getAge()));
         club.setText(J.getClub());
         equipe.setText(J.getEquipe().getNom());
+        image.setImage(new Image("file:"+J.getImage()));
     }
 }

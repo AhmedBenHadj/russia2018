@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="Presentation.Modifier_equipeController">
+   <children>
+      <Label fx:id="titre" alignment="CENTER" layoutX="374.0" layoutY="14.0" prefHeight="54.0" prefWidth="425.0" text="MODIFIER UNE EQUIPE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="293.0" layoutY="54.0" text="Choisir un id ou choisir un nom :" />
+      <HBox layoutX="151.0" layoutY="94.0" spacing="40.0">
+         <children>
+            <Label layoutX="151.0" layoutY="105.0" text="Nom :" />
+            <JFXComboBox fx:id="combo_nom" layoutX="201.0" layoutY="94.0" onAction="#afficher_1" prefHeight="31.0" prefWidth="134.0" />
+            <Label layoutX="401.0" layoutY="105.0" text="Id :" />
+            <JFXComboBox fx:id="combo_id" layoutX="441.0" layoutY="94.0" onAction="#afficher_2" prefHeight="31.0" prefWidth="134.0" />
+         </children>
+      </HBox>
+      <VBox fx:id="v_box_1" layoutX="54.0" layoutY="159.0" spacing="30.0" visible="false">
+         <children>
+            <Label layoutX="54.0" layoutY="159.0" text="Nom :" />
+            <Label layoutX="56.0" layoutY="217.0" text="Entraineur :" />
+            <Label layoutX="56.0" layoutY="269.0" text="Drapeau :" />
+            <Label layoutX="70.0" layoutY="324.0" text="Maillot :" />
+            <Label layoutX="56.0" layoutY="368.0" text="Progress :" />
+            <Label layoutX="71.0" layoutY="418.0" text="Points :" />
+            <Label layoutX="70.0" layoutY="470.0" text="Groupe :" />
+         </children>
+      </VBox>
+      <VBox fx:id="v_box_2" layoutX="209.0" layoutY="159.0" spacing="19.0" visible="false">
+         <children>
+            <JFXTextField fx:id="nom" editable="false" layoutX="209.0" layoutY="159.0" />
+            <JFXComboBox fx:id="entraineur" layoutX="265.0" layoutY="206.0" prefHeight="31.0" prefWidth="167.0" />
+            <JFXButton fx:id="drapeau" layoutX="261.0" layoutY="258.0" onAction="#upload_1" prefHeight="31.0" prefWidth="168.0" text="Choisir une image" />
+            <JFXButton fx:id="maillot" layoutX="261.0" layoutY="307.0" onAction="#upload_2" prefHeight="31.0" prefWidth="167.0" text="Choisir une image" />
+            <JFXComboBox fx:id="progress" layoutX="265.0" layoutY="360.0" prefHeight="31.0" prefWidth="167.0" />
+            <JFXTextField fx:id="points" layoutX="209.0" layoutY="403.0" />
+            <JFXComboBox fx:id="groupe" layoutX="265.0" layoutY="455.0" prefHeight="31.0" prefWidth="168.0" />
+         </children>
+      </VBox>
+      <JFXButton fx:id="modifier" layoutX="54.0" layoutY="508.0" onAction="#modifier" prefHeight="75.0" prefWidth="328.0" text="Modifier" visible="false">
+         <font>
+            <Font size="41.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

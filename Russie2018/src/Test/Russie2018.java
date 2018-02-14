@@ -48,7 +48,7 @@ public class Russie2018 {
         E1 = S1.get(10);
         E1.setListe_joueur(liste);
         System.out.println(E1);
-        Joueur J = new Joueur(S1.get(10),"belhaj", "ahmed", 20, "AC", 8, "css");
+        //Joueur J = new Joueur(S1.get(10),"belhaj", "ahmed", 20, "AC", 8, "css");
         ServiceJoueur Service_joueur = new ServiceJoueur();
         //Service_joueur.ajouter(J);
         //System.out.println(Service_joueur.getALL());

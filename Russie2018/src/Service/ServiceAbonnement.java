@@ -43,7 +43,7 @@ public class ServiceAbonnement implements IServiceAbonnement {
             pst.setInt(2, a.getJoueur().getId());
             pst.executeUpdate();
         } catch (SQLException s) {
-            System.out.println(s);
+            System.out.println(s+" un probléme de l'ajout abonnement");
         }
         return true;
     }
@@ -96,6 +96,24 @@ public class ServiceAbonnement implements IServiceAbonnement {
         }
         return E;
     }
+    public Abonnement get(User u ,Joueur j) {
+        Abonnement E = new Abonnement();
+        try {
+            String req = "SELECT * FROM abonnement WHERE id_user=? AND id_joueur=?";
+            pst = cnx.prepareStatement(req);
+            pst.setInt(1, u.getId());
+            pst.setInt(2,j.getId());
+            ResultSet res = pst.executeQuery();
+            while (res.next()) {
+                E.setId(res.getInt(1));
+                E.setUser(new ServiceUser().retrieveId(res.getInt(2)));
+                E.setJoueur(new ServiceJoueur().get(res.getInt(3)));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return E;
+    }
 
     @Override
     public List<Abonnement> getALL() {
@@ -139,7 +157,7 @@ public class ServiceAbonnement implements IServiceAbonnement {
             pst = cnx.prepareStatement(req);
             ResultSet res = pst.executeQuery();
             while (res.next()) {
-                Joueur j = new Joueur(res.getInt(1), new ServiceEquipe().get(res.getInt(2)), res.getString("nom"), res.getString("prenom"), res.getInt(5), res.getString("poste"), res.getInt(7), res.getString("club"));
+                Joueur j = new Joueur(res.getInt(1), new ServiceEquipe().get(res.getInt(2)), res.getString("nom"), res.getString("prenom"), res.getInt(5), res.getString("poste"), res.getInt(7), res.getString("club") ,res.getString("image"));
                 liste.add(j);
             }
         } catch (SQLException e) {
@@ -190,7 +208,7 @@ public class ServiceAbonnement implements IServiceAbonnement {
                 pst.setInt(1, u.getId());
                 ResultSet res = pst.executeQuery();
                 while (res.next()) {
-                    Joueur j = new Joueur(res.getInt(1), new ServiceEquipe().get(res.getInt(2)), res.getString("nom"), res.getString("prenom"), res.getInt(5), res.getString("poste"), res.getInt(7), res.getString("club"));
+                    Joueur j = new Joueur(res.getInt(1), new ServiceEquipe().get(res.getInt(2)), res.getString("nom"), res.getString("prenom"), res.getInt(5), res.getString("poste"), res.getInt(7), res.getString("club"),res.getString("image"));
                     if (mymap.containsKey(u)) {
                         mymap.get(u).add(j);
                     } else {

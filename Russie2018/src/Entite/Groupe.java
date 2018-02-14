@@ -15,7 +15,7 @@ public class Groupe {
     private int id;
     private List<Match> GM;
     private String nom;
-    
+    private List<Equipe> liste_equipe ;
     public Groupe(){
         
     }

@@ -93,6 +93,24 @@ public class ServiceEntraineur implements IServiceEntraineur{
         }
         return E;
     }
+    public Entraineur get(String nom) {
+        Entraineur E = new Entraineur() ;
+        try{
+            String req ="SELECT * FROM entraineur WHERE nom=?";
+            pst= cnx.prepareStatement(req);
+            pst.setString(1, nom);
+            ResultSet res = pst.executeQuery();
+            while(res.next()){
+                E.setId(res.getInt(1));
+                E.setNom(res.getString("nom"));
+                E.setPrenom(res.getString("prenom"));
+                E.setDescription(res.getString("description"));
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return E;
+    }
 
     @Override
     public List<Entraineur> getALL() {

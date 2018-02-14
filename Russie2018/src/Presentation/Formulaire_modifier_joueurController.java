@@ -10,6 +10,7 @@ import Service.ServiceJoueur;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -19,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
 /**
  * FXML Controller class
@@ -51,6 +53,10 @@ public class Formulaire_modifier_joueurController implements Initializable {
     private Label succee;
     @FXML
     private JFXComboBox<String> combo_nom;
+    @FXML
+    private Label titre;
+    @FXML
+    private JFXButton image;
     /**
      * Initializes the controller class.
      */
@@ -74,7 +80,7 @@ public class Formulaire_modifier_joueurController implements Initializable {
         joueur.setNom(nom.getText());
         joueur.setPrenom(prenom.getText());
         joueur.setPoste(poste.getValue());
-        new ServiceJoueur().modifier(joueur.getId(), joueur.getEquipe(), joueur.getNom(), joueur.getPrenom(), joueur.getAge(), joueur.getPoste(), joueur.getNumero(), joueur.getClub());
+        new ServiceJoueur().modifier(joueur.getId(), joueur.getEquipe(), joueur.getNom(), joueur.getPrenom(), joueur.getAge(), joueur.getPoste(), joueur.getNumero(), joueur.getClub(),image.getText());
         succee.setVisible(true);
         try{
             id.setItems(null);
@@ -151,5 +157,16 @@ public class Formulaire_modifier_joueurController implements Initializable {
             data.add(J.getNom());
         }
         return data ;
+    }
+
+    @FXML
+    private void upload(ActionEvent event) {
+        FileChooser F = new FileChooser();
+        F.setTitle("image joueur");
+        F.getExtensionFilters().addAll();
+        File f = F.showOpenDialog(titre.getScene().getWindow());
+        if(f != null){
+            image.setText(f.toString());
+        }
     }
 }

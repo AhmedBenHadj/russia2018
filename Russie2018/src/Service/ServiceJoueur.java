@@ -34,7 +34,7 @@ public class ServiceJoueur implements IServiceJoueur {
             return false;
         }
         try {
-            String req = "INSERT INTO joueur (id_equipe,nom,prenom,age,poste,numero,club) values(?,?,?,?,?,?,?)";
+            String req = "INSERT INTO joueur (id_equipe,nom,prenom,age,poste,numero,club,image) values(?,?,?,?,?,?,?,?)";
             pst = cnx.prepareStatement(req);
             pst.setInt(1, j.getEquipe().getId());
             pst.setString(2, j.getNom());
@@ -43,6 +43,7 @@ public class ServiceJoueur implements IServiceJoueur {
             pst.setString(5, j.getPoste());
             pst.setInt(6, j.getNumero());
             pst.setString(7, j.getClub());
+            pst.setString(8,j.getImage());
             pst.executeUpdate();
         } catch (SQLException s) {
             System.out.println(s);
@@ -51,9 +52,9 @@ public class ServiceJoueur implements IServiceJoueur {
     }
 
     @Override
-    public void modifier(int id, Equipe Equipe, String nom, String prenom, int age, String poste, int numero, String club) {
+    public void modifier(int id, Equipe Equipe, String nom, String prenom, int age, String poste, int numero, String club,String image) {
         try {
-            String req = "UPDATE joueur SET id_equipe=?,nom=?,prenom=?,age=?,poste=?,numero=?,club=? WHERE id=?";
+            String req = "UPDATE joueur SET id_equipe=?,nom=?,prenom=?,age=?,poste=?,numero=?,club=?,image=? WHERE id=?";
             pst = cnx.prepareStatement(req);
             pst.setInt(1, Equipe.getId());
             pst.setString(2, nom);
@@ -62,7 +63,8 @@ public class ServiceJoueur implements IServiceJoueur {
             pst.setString(5, poste);
             pst.setInt(6, numero);
             pst.setString(7, club);
-            pst.setInt(8, id);
+            pst.setString(8,image);
+            pst.setInt(9, id);
             pst.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);
@@ -102,6 +104,7 @@ public class ServiceJoueur implements IServiceJoueur {
                 E.setPoste(res.getString("poste"));
                 E.setNumero(res.getInt(7));
                 E.setClub(res.getString("club"));
+                E.setImage(res.getString("image"));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -124,6 +127,7 @@ public class ServiceJoueur implements IServiceJoueur {
                 E.setPoste(res.getString("poste"));
                 E.setNumero(res.getInt(7));
                 E.setClub(res.getString("club"));
+                E.setImage(res.getString("image"));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -139,7 +143,7 @@ public class ServiceJoueur implements IServiceJoueur {
             pst = cnx.prepareStatement(req);
             ResultSet res = pst.executeQuery();
             while (res.next()) {
-                Joueur j = new Joueur(res.getInt(1), new ServiceEquipe().get(res.getInt(2)), res.getString("nom"), res.getString("prenom"), res.getInt(5), res.getString("poste"), res.getInt(7), res.getString("club"));
+                Joueur j = new Joueur(res.getInt(1), new ServiceEquipe().get(res.getInt(2)), res.getString("nom"), res.getString("prenom"), res.getInt(5), res.getString("poste"), res.getInt(7), res.getString("club"),res.getString("image"));
                 liste.add(j);
             }
         } catch (SQLException e) {
@@ -156,7 +160,7 @@ public class ServiceJoueur implements IServiceJoueur {
             pst = cnx.prepareStatement(req);
             ResultSet res = pst.executeQuery();
             while (res.next()) {
-                Joueur j = new Joueur(res.getInt(1), new ServiceEquipe().get(res.getInt(2)), res.getString("nom"), res.getString("prenom"), res.getInt(5), res.getString("poste"), res.getInt(7), res.getString("club"));
+                Joueur j = new Joueur(res.getInt(1), new ServiceEquipe().get(res.getInt(2)), res.getString("nom"), res.getString("prenom"), res.getInt(5), res.getString("poste"), res.getInt(7), res.getString("club"),res.getString("image"));
                 liste.add(j);
             }
         } catch (SQLException e) {
@@ -202,7 +206,7 @@ public class ServiceJoueur implements IServiceJoueur {
                 pst.setString(1, champs);
                 ResultSet res = pst.executeQuery();
                 while (res.next()) {
-                    Joueur j = new Joueur(res.getInt(1), new ServiceEquipe().get(res.getInt(2)), res.getString("nom"), res.getString("prenom"), res.getInt(5), res.getString("poste"), res.getInt(7), res.getString("club"));
+                    Joueur j = new Joueur(res.getInt(1), new ServiceEquipe().get(res.getInt(2)), res.getString("nom"), res.getString("prenom"), res.getInt(5), res.getString("poste"), res.getInt(7), res.getString("club"),res.getString("image"));
                     liste.add(j);
                 }
             } catch (SQLException e) {

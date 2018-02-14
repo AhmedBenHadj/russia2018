@@ -18,6 +18,7 @@ public class Joueur {
     private String poste ;
     private int numero ;
     private String club ;
+    private String image ;
     
     public Joueur(){
         this.id =0 ;
@@ -28,8 +29,9 @@ public class Joueur {
         this.poste="";
         this.numero=0;
         this.club="";
+        this.image="";
     }
-    public Joueur(int id ,Equipe equipe,String nom ,String prenom ,int age ,String poste,int numero ,String club){
+    public Joueur(int id ,Equipe equipe,String nom ,String prenom ,int age ,String poste,int numero ,String club,String image){
         this.id = id ;
         this.equipe =equipe;
         this.nom = nom ;
@@ -38,10 +40,11 @@ public class Joueur {
         this.poste = poste ;
         this.numero=numero;
         this.club = club ;
+        this.image= image ;
     }
 
     
-    public Joueur(Equipe equipe,String nom ,String prenom ,int age ,String poste ,int numero,String club){
+    public Joueur(Equipe equipe,String nom ,String prenom ,int age ,String poste ,int numero,String club,String image){
         this.equipe = equipe;
         this.nom = nom ;
         this.prenom = prenom ;
@@ -49,6 +52,15 @@ public class Joueur {
         this.poste = poste ;
         this.numero= numero;
         this.club = club ;
+        this.image = image ;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
     
     @Override

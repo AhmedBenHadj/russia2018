@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="675.0" prefWidth="904.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentation.Conteneur_liste_entraineurController">
+   <children>
+      <ScrollPane hbarPolicy="NEVER" layoutX="14.0" layoutY="67.0" prefHeight="608.0" prefWidth="904.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="67.0">
+         <content>
+            <VBox fx:id="v_box" prefHeight="607.0" prefWidth="902.0" />
+         </content>
+      </ScrollPane>
+      <JFXTextField fx:id="recherche" layoutX="669.0" layoutY="25.0" onKeyReleased="#afficher" prefHeight="31.0" prefWidth="221.0" />
+   </children>
+</AnchorPane>

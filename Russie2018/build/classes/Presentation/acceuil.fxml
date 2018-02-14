@@ -36,19 +36,19 @@
                </children>
             </GridPane>
             <Label fx:id="Id_titre" alignment="CENTER" prefHeight="84.0" prefWidth="925.0" styleClass="action-btn" stylesheets="@../../../../GestionEquipe_GestionJoueur/russia2018/CSS/jbootx-master/src/main/resources/bootstrap3.css" text="GRAND TITRE" GridPane.columnIndex="1" />
-            <TabPane fx:id="Main_tabpane" prefHeight="200.0" prefWidth="200.0" styleClass="plain" stylesheets="@../../../../GestionEquipe_GestionJoueur/russia2018/CSS/jbootx-master/src/main/resources/bootstrap3.css" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TabPane fx:id="Main_tabpane" prefHeight="200.0" prefWidth="200.0" styleClass="plain" stylesheets="@../../../../GestionEquipe_GestionJoueur/russia2018/CSS/jbootx-master/src/main/resources/bootstrap3.css" tabClosingPolicy="ALL_TABS" GridPane.columnIndex="1" GridPane.rowIndex="1">
               <tabs>
-                <Tab fx:id="Acceuil" text="Acceuil">
+                <Tab fx:id="Acceuil" closable="false" text="Acceuil">
                   <content>
                     <AnchorPane fx:id="Acceuil_Anchor" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="primary" stylesheets="@../../../../GestionEquipe_GestionJoueur/russia2018/CSS/jbootx-master/src/main/resources/bootstrap3.css" />
                   </content>
                 </Tab>
-                <Tab fx:id="Galerie" text="Galerie">
+                <Tab fx:id="Galerie" closable="false" text="Galerie">
                   <content>
                     <AnchorPane fx:id="Galerie_Anchor" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                   </content>
                 </Tab>
-                  <Tab fx:id="Pari" text="Pari">
+                  <Tab fx:id="Pari" closable="false" text="Pari">
                      <content>
                         <AnchorPane fx:id="Pari_Anchor" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -62,12 +62,12 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab fx:id="Fantasy" text="Fantasy">
+                  <Tab fx:id="Fantasy" closable="false" text="Fantasy">
                      <content>
                         <AnchorPane fx:id="Fantasy_Anchor" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                      </content>
                   </Tab>
-                  <Tab fx:id="Profil" text="Profil">
+                  <Tab fx:id="Profil" closable="false" text="Profil">
                      <content>
                         <AnchorPane fx:id="Profil_Anchor" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -122,7 +122,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                  <Tab fx:id="Dashboard" text="Dashboard">
+                  <Tab fx:id="Dashboard" closable="false" text="Dashboard">
                     <content>
                       <AnchorPane fx:id="Dashboard_Anchor" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -135,11 +135,13 @@
                                               <TitledPane animated="false" text="Gérer match">
                                                    <content>
                                                       <JFXListView fx:id="Gerer_match_list" />
-                                                   </content></TitledPane>
+                                                   </content>
+                                                </TitledPane>
                                               <TitledPane animated="false" text="Gérer evenement">
                                                    <content>
                                                       <JFXListView fx:id="Gere_Evenement_list" />
-                                                   </content></TitledPane>
+                                                   </content>
+                                                </TitledPane>
                                                 <TitledPane fx:id="Gere_Groupe" animated="false" layoutX="10.0" layoutY="41.0" text="Gérer groupe">
                                                    <content>
                                                       <JFXListView fx:id="Gere_Groupe_List" />
@@ -160,13 +162,18 @@
                                                       <JFXListView fx:id="Gerer_Equipe_List" />
                                                    </content>
                                                 </TitledPane>
+                                                <TitledPane fx:id="Gere_Entraineur" animated="false" layoutX="10.0" layoutY="165.0" text="Gérer entraineur">
+                                                   <content>
+                                                      <JFXListView fx:id="Gerer_Entraineur_List" />
+                                                   </content>
+                                                </TitledPane>
                                             </panes>
                                           </Accordion>
                                        </children>
                                     </AnchorPane>
                                   <AnchorPane fx:id="Anchor_Split_2" minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
-                                          <TabPane fx:id="Dashboard_tabpane" layoutX="79.0" layoutY="76.0" prefHeight="667.0" prefWidth="629.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <TabPane fx:id="Dashboard_tabpane" layoutX="79.0" layoutY="76.0" prefHeight="667.0" prefWidth="629.0" tabClosingPolicy="ALL_TABS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <tabs>
                                               <Tab fx:id="Acceuil" text="Acceuil" />
                                             </tabs>

@@ -322,4 +322,18 @@ public class User {
         }
         return tmp;
     }
+    @Override
+    public boolean equals(Object o){
+        if(o != null && o instanceof User){
+            User u = (User) o ;
+            if(u.getId() == this.id)
+                return true ;
+        }
+        return false ;
+    }
+    
+    @Override
+    public int hashCode(){
+        return 5 ;
+    }
 }
