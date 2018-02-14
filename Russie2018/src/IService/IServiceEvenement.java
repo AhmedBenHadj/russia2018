@@ -5,8 +5,9 @@
  */
 package IService;
 
+import Entite.Evenement;
 import java.util.List;
-import Entite.*;
+
 
 /**
  *
@@ -17,4 +18,6 @@ public interface IServiceEvenement {
     public List<Evenement> get_Evenement();
     public int count_Evenement();
     public Evenement get(int id);
+    public int recuperer_IDMATCH(int i);
+    public List<Evenement> get_Event_Par_ID(int id);
 }

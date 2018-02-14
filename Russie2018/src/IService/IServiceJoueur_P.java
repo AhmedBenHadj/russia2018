@@ -5,8 +5,9 @@
  */
 package IService;
 
+import Entite.Joueur_P;
 import java.util.List;
-import Entite.*;
+
 
 /**
  *
@@ -17,4 +18,5 @@ public interface IServiceJoueur_P {
      public int count_Joueur_P();
      public Joueur_P get(int id);
      public List<Joueur_P> getALL();
+     public int recuperer_Id_par_nom(String n);
 }

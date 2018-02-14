@@ -102,5 +102,20 @@ public class ServiceStade implements IServiceStade {
         }
         return S;
     }
-
+    public int recuperer_Id_par_nom(String n){
+        int i=0;
+        try{
+            String req ="SELECT id FROM stade WHERE nom=?";
+            PreparedStatement pst= MyConnexion.getInstance().prepareStatement(req);
+            pst.setString(1, n);
+            ResultSet res = pst.executeQuery();
+            while(res.next()){
+                i=res.getInt(1);
+       
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return i;
+    }
 }

@@ -5,8 +5,6 @@
  */
 package Entite;
 
-
-
 /**
  *
  * @author hseli
@@ -15,21 +13,24 @@ public class Evenement {
     private int id;
     private Match M;
     private Joueur_P JP;
-    private int carton;
+    public enum TypeCarton{PasC,Rouge,Jaune};
+    private TypeCarton carton;
     private int but;
     private int temps;
     
     public Evenement(){
+        
     }
 
-    public Evenement(int id, Match M, Joueur_P JP, int carton, int but, int temps) {
-        this.id = id;
+    public Evenement(Match M, Joueur_P JP, TypeCarton carton, int but, int temps) {
         this.M = M;
         this.JP = JP;
         this.carton = carton;
         this.but = but;
         this.temps = temps;
     }
+
+    
 
     public int getId() {
         return id;
@@ -55,11 +56,11 @@ public class Evenement {
         this.JP= Joueur;
     }
 
-    public int getCarton() {
+    public TypeCarton getCarton() {
         return carton;
     }
 
-    public void setCarton(int carton) {
+    public void setCarton(TypeCarton carton) {
         this.carton = carton;
     }
 
@@ -70,6 +71,10 @@ public class Evenement {
     public void setBut(int but) {
         this.but = but;
     }
+
+
+
+   
 
     public int getTemps() {
         return temps;

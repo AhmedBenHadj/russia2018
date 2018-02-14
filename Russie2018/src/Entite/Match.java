@@ -6,6 +6,8 @@
 package Entite;
 
 
+import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 /**
@@ -14,17 +16,21 @@ import java.sql.Timestamp;
  */
 
 public class Match {
-    private int id;
+     private int id;
     public enum EtatMatch{Debut,Encours,Terminé};
+    public enum progress{pool,last_16,quart_final,demi_final,final_}
     private Groupe G;
     private Equipe E1;
     private Equipe E2;
     private Stade S;
-    private Timestamp date;
+    private Date date;
+    private Time heure;
+    private Score score1;
     private String score;
     private EtatMatch etat;
     private int duree;
     private int nombre_spectateur;
+    private progress type;
     //ArrayList<Evenement> EventMatch;
     // ArrayList<Commentaire> CommMatch;
 
@@ -35,17 +41,38 @@ public class Match {
         
     }
 
-    public Match(int id,Groupe G, Equipe E1, Equipe E2, Stade S, Timestamp date, String score, EtatMatch etat, int duree, int nombre_spectateur) {
-        this.id = id;
-        this.G=G;
+    public Match(Groupe G, Equipe E1, Equipe E2, Stade S, Date date, Time heure, Score score1, String score, EtatMatch etat, int duree, int nombre_spectateur, progress type) {
+        this.G = G;
         this.E1 = E1;
         this.E2 = E2;
         this.S = S;
         this.date = date;
+        this.heure = heure;
+        this.score1 = score1;
         this.score = score;
         this.etat = etat;
         this.duree = duree;
         this.nombre_spectateur = nombre_spectateur;
+        this.type = type;
+    }
+
+    public Match(int i,Date date,Time heure,Equipe E1,Score score,Equipe E2,Stade S){
+        this.id=i;
+        this.date = date;
+        this.heure = heure;
+        this.E1 = E1;
+        this.score1 = score;
+        this.E2 = E2;
+        this.S = S;
+
+    }
+
+    public progress getType() {
+        return type;
+    }
+
+    public void setType(progress type) {
+        this.type = type;
     }
 
     public Groupe getG() {
@@ -95,12 +122,30 @@ public class Match {
         this.S = S;
     }
 
-    public Timestamp getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Time getHeure() {
+        return heure;
+    }
+
+    public void setHeure(Time heure) {
+        this.heure = heure;
+    }
+
+   
+
+    public Score getScore1() {
+        return score1;
+    }
+
+    public void setScore1(Score score1) {
+        this.score1 = score1;
     }
 
     public String getScore() {
@@ -110,6 +155,7 @@ public class Match {
     public void setScore(String score) {
         this.score = score;
     }
+    
 
     public EtatMatch getEtat() {
         return etat;
@@ -125,6 +171,12 @@ public class Match {
 
     public void setNombre_spectateur(int nombre_spectateur) {
         this.nombre_spectateur = nombre_spectateur;
+    }
+     
+    
+    @Override
+    public String toString() {
+        return "Match{" + "id=" + id + ", G=" + G + ", E1=" + E1 + ", E2=" + E2 + ", S=" + S + ", date=" + date + ", score=" + score + ", etat=" + etat + ", duree=" + duree + ", nombre_spectateur=" + nombre_spectateur + ", type=" + type + '}';
     }
 
    

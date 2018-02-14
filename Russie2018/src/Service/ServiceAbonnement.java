@@ -170,7 +170,8 @@ public class ServiceAbonnement implements IServiceAbonnement {
     public List<User> get_users() {
         List<User> liste = new ArrayList<>();
         try {
-            String req = "SELECT * FROM user WHERE id=(SELECT id_user FROM abonnement)";
+           // String req = "SELECT * FROM user WHERE id=(SELECT id_user FROM abonnement)";
+            String req="SELECT * FROM user u JOIN Abonnement a ON u.id=a.id_user";
             pst = cnx.prepareStatement(req);
             ResultSet res = pst.executeQuery();
             while (res.next()) {
@@ -191,7 +192,7 @@ public class ServiceAbonnement implements IServiceAbonnement {
                 liste.add(u);
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            System.out.println(e + "l'erreur provient de get_users");
         }
         return liste;
     }
@@ -203,21 +204,29 @@ public class ServiceAbonnement implements IServiceAbonnement {
         for (User u : this.get_users()) {
             List<Joueur> liste = new ArrayList<>();
             try {
-                String req = "SELECT * FROM joueur WHERE id=(SELECT id_joueur FROM abonnement WHERE id_user=?)";
+                //String req = "SELECT * FROM joueur WHERE id=(SELECT id_joueur FROM abonnement WHERE id_user=?)";
+                //String req = "SELECT j.* FROM abonnement a join joueur j on j.id=a.id_joueur where a.id_user=?";
+                String req="SELECT id_joueur FROM abonnement WHERE id_user=?";
                 pst = cnx.prepareStatement(req);
                 pst.setInt(1, u.getId());
-                ResultSet res = pst.executeQuery();
-                while (res.next()) {
-                    Joueur j = new Joueur(res.getInt(1), new ServiceEquipe().get(res.getInt(2)), res.getString("nom"), res.getString("prenom"), res.getInt(5), res.getString("poste"), res.getInt(7), res.getString("club"),res.getString("image"));
-                    if (mymap.containsKey(u)) {
-                        mymap.get(u).add(j);
-                    } else {
-                        liste.add(j);
-                        mymap.put(u, liste);
+                ResultSet res_1 = pst.executeQuery();
+                while(res_1.next()){
+                    String req_1="SELECT * FROM joueur WHERE id=?";
+                    PreparedStatement pst_1 = cnx.prepareStatement(req_1);
+                    pst_1.setInt(1, res_1.getInt(1));
+                    ResultSet res = pst_1.executeQuery();
+                    while (res.next()) {
+                        Joueur j = new Joueur(res.getInt(1), new ServiceEquipe().get(res.getInt(2)), res.getString("nom"), res.getString("prenom"), res.getInt(5), res.getString("poste"), res.getInt(7), res.getString("club"),res.getString("image"));
+                        if (mymap.containsKey(u)) {
+                            mymap.get(u).add(j);
+                        } else {
+                            liste.add(j);
+                            mymap.put(u, liste);
+                        }
                     }
                 }
             } catch (SQLException e) {
-                System.out.println(e);
+                System.out.println(e +" l'erreur provient de get_user par leur id");
             }
         }
         return mymap;

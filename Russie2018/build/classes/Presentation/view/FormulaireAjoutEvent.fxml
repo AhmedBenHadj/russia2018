@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.141" fx:controller="Presentation.controller.FormulaireAjoutEventController">
+   <children>
+      <Label layoutX="28.0" layoutY="56.0" prefHeight="17.0" prefWidth="52.0" text="Match :" />
+      <Label layoutX="28.0" layoutY="120.0" text="Joueur :" />
+      <Label layoutX="28.0" layoutY="192.0" text="Carton :" />
+      <Label layoutX="28.0" layoutY="256.0" text="But :" />
+      <Label layoutX="26.0" layoutY="321.0" text="Temps : " />
+      <JFXComboBox fx:id="id_match" layoutX="89.0" layoutY="52.0" prefHeight="25.0" prefWidth="87.0" />
+      <JFXComboBox fx:id="id_joueur" layoutX="89.0" layoutY="116.0" prefHeight="25.0" prefWidth="87.0" />
+      <JFXComboBox fx:id="id_carton" layoutX="89.0" layoutY="188.0" prefHeight="25.0" prefWidth="94.0" />
+      <JFXComboBox fx:id="id_but" layoutX="80.0" layoutY="252.0" prefHeight="25.0" prefWidth="115.0" />
+      <JFXTextField fx:id="id_temps" layoutX="89.0" layoutY="317.0" />
+      <JFXButton fx:id="id_ajouter" layoutX="329.0" layoutY="317.0" text="Ajouter" />
+   </children>
+</AnchorPane>
