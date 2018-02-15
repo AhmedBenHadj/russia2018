@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="632.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Presentation.PariController">
+   <children>
+      <TableView fx:id="table" layoutX="14.0" layoutY="260.0" prefHeight="285.0" prefWidth="362.0">
+        <columns>
+          <TableColumn fx:id="e1" prefWidth="83.0" text="Equipe 1" />
+          <TableColumn fx:id="e2" minWidth="0.0" prefWidth="83.0" text="Equipe 2" />
+            <TableColumn fx:id="c1" minWidth="0.0" prefWidth="65.0" text="1" />
+            <TableColumn fx:id="cn" minWidth="0.0" prefWidth="65.0" text="X" />
+            <TableColumn fx:id="c2" minWidth="0.0" prefWidth="65.0" text="2" />
+        </columns>
+      </TableView>
+      <Button fx:id="bpari" layoutX="65.0" layoutY="564.0" mnemonicParsing="false" onAction="#parier" text="Parier !" />
+      <TableView fx:id="table2" layoutX="295.0" layoutY="48.0" prefHeight="200.0" prefWidth="338.0">
+        <columns>
+          <TableColumn fx:id="e11" prefWidth="83.0" text="Equipe 1" />
+          <TableColumn fx:id="e22" prefWidth="83.0" text="Equipe 2" />
+            <TableColumn fx:id="c" prefWidth="50.0" text="Cote" />
+            <TableColumn fx:id="m" prefWidth="50.0" text="Mise" />
+            <TableColumn fx:id="g" prefWidth="70.0" text="Gain" />
+        </columns>
+      </TableView>
+      <CheckBox fx:id="simple" layoutX="385.0" layoutY="357.0" mnemonicParsing="false" onAction="#simple" text="Simple" />
+      <CheckBox fx:id="multiple" layoutX="480.0" layoutY="357.0" mnemonicParsing="false" onAction="#multiple" prefHeight="18.0" prefWidth="89.0" text="Multiple" />
+      <Label fx:id="ctotlab" layoutX="430.0" layoutY="428.0" text="Cote total :" />
+      <Label fx:id="gtotlab" layoutX="420.0" layoutY="462.0" text="Gain totaux :" />
+      <Button fx:id="vmp" layoutX="412.0" layoutY="505.0" mnemonicParsing="false" onAction="#valider" text="Valider mes paris" />
+      <TextField fx:id="ctot" layoutX="512.0" layoutY="423.0" prefHeight="27.0" prefWidth="66.0" />
+      <TextField fx:id="gtot" layoutX="512.0" layoutY="457.0" prefHeight="27.0" prefWidth="66.0" />
+   </children>
+</AnchorPane>
